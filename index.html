@@ -484,19 +484,20 @@ function renderAdvanced(m){
 
   document.getElementById('advancedInverse').innerHTML = `
   <div class="adv-card">
-    <div class="adv-k">PoS implicite du marché</div>
-    <div class="adv-v">${impliedPos==null ? '—' : fmtPct(impliedPos,1)}</div>
+    <div class="adv-k">
+    A - PoS implicite du marché : <strong>${impliedPos==null ? '—' : fmtPct(impliedPos,1)}</strong>
+    </div>
     <div class="adv-d">sur un cours observé de ${fmtEur(state.marketPrice,2)} et un scénario de succès valorisé à l’horizon ${horizon}.</div>
   </div>
   <div class="adv-card">
     <div class="adv-k">
-      WACC implicite accepté : <strong>${impliedWacc==null || !Number.isFinite(impliedWacc) ? '—' : `${fmt(impliedWacc,1)}%`}</strong>
+      B - WACC implicite accepté : <strong>${impliedWacc==null || !Number.isFinite(impliedWacc) ? '—' : `${fmt(impliedWacc,1)}%`}</strong>
     </div>
     <div class="adv-d">si l’on garde inchangé le scénario ${horizon}, c’est le rendement annualisé qu’il faut accepter pour justifier le cours observé.</div>
   </div>
   <div class="adv-card">
-    <div class="adv-k">Plateau de royalties implicite</div>
-    <div class="adv-v">${impliedPlateau==null || !Number.isFinite(impliedPlateau) ? '—' : (impliedPlateau <= 0 ? 'Aucun plateau requis' : fmtM(impliedPlateau,1))}</div>
+    <div class="adv-k">C- Plateau de royalties implicite</div>
+    <div class="adv-v">${impliedPlateau==null || !Number.isFinite(impliedPlateau) ? '—' : (impliedPlateau <= 0 ? '    Aucun plateau requis' : fmtM(impliedPlateau,1))}</div>
     <div class="adv-d">${impliedPlateau != null && Number.isFinite(impliedPlateau) && impliedPlateau <= 0 
       ? `La trésorerie ${horizon} du scénario suffit à justifier le cours observé. Le marché valorise la société en dessous de la trésorerie projetée du scénario.`
       : `À WACC ${fmt(displayWacc,1)}% et horizon ${horizon}, c’est le plateau annuel de royalties qu’il faudrait croire pour justifier le cours observé, en conservant la trésorerie du scénario.`}</div>
