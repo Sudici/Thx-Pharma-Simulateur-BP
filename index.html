@@ -248,6 +248,10 @@
   Fichier autonome, sans dépendance externe. Il s’exécute localement dans le navigateur tant qu’il n’est pas hébergé publiquement. Pour un partage public, le plus simple est de l’héberger tel quel sur GitHub Pages, Netlify ou un bucket statique.
 </div>
 <script>
+
+function track(eventName) {
+if (window.goatcounter) goatcounter.count({ path: eventName, event: true });
+}
 const YEARS = Array.from({length:11}, (_,i)=>2026+i);
 const PROGRAM_DEFS = [
   {key:'tx01Exeltis', label:'TX01 Exeltis', partner:'exeltis'},
@@ -623,7 +627,12 @@ function render(){
   renderLaunchTable();
   saveHash(state);
 }
-function applyScenario(key){ applyScenarioTo(state,key); syncInputs(); render(); }
+function applyScenario(key){
+  applyScenarioTo(state,key);
+  track(`scenario_${key}`);
+  syncInputs();
+  render();
+}
 function applyScenarioTo(target,key){
   if (!target.meta) target.meta = structuredClone(BASE.meta);
   if (key === 'base') { Object.assign(target, structuredClone(BASE)); return; }
