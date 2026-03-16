@@ -483,9 +483,13 @@ function renderAdvanced(m){
     : null;
 
   document.getElementById('advancedInverse').innerHTML = `
-    <div class="adv-card">
-      <div class="adv-k">PoS implicite du marché</div>
-      <div class="adv-v">${impliedPos==null ? '—' : fmtPct(impliedPos,1)}</div>
+    <div class="adv-card">      
+    <div class="adv-k">
+      WACC implicite accepté :
+       <strong>${impliedWacc==null || !Number.isFinite(impliedWacc) ? '-' : `${fmt(impliedWacc,1)}%`}</strong>
+    </div>
+    <div class="adv-d">si l’on garde inchangé le scénario ${horizon}, c’est le rendement annualisé qu'il faut accepter pour justifier le cours observé.</div>
+    </div>
       <div class="adv-d">sur un cours observé de ${fmtEur(state.marketPrice,2)} et un scénario de succès valorisé à l’horizon ${horizon}.</div>
     </div>
     <div class="adv-card">
